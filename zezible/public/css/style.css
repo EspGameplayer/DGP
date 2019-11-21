@@ -1,0 +1,81 @@
+
+/*-----------RESPONSIVE-------------*/
+@media (max-width: 600px) {
+	body{
+ 		
+ 		/*background-color: red;*/
+	}
+
+	.sub-pagename{
+		margin-left: 10px !important;
+	}
+	.bttn{
+		align-items: center !important;
+		margin-bottom: 2%;
+	}
+
+}
+/*-----------FIN RESPONSIVE-------------*/
+
+.card-header{
+	background-color: #79FCA3;
+	border-bottom: black solid 1px;
+}
+.rightForm{
+	float: left !important;
+}
+.leftForm{
+	float: left !important;
+}
+
+.card{
+	border: black solid 1px;
+}
+#navbarZezible{
+	background-color: #2c8b80;
+	color: #e8f6da !important;
+}
+
+.nav-link {
+        color: white !important;
+}
+
+.card{
+	 padding-right: 0px;
+	 padding-left: 0px;
+}
+
+.pagename{
+	background-color: #e8f6da;
+	color: #2c8b80;
+	padding: 1%;
+	border-bottom: #2c8b80 solid 2px;
+}
+
+.sub-pagename{
+	margin-left: 50px;
+}
+
+.btnblack{
+	border: #940EDB solid 1px;
+	color: #940EDB !important;
+}
+.btnblack:hover{
+	background-color: #CA7FF2;
+	color: white !important;
+}
+
+.nameUser{
+	color: black;
+	alink: black;
+	vlink: #e8f6da;
+}
+
+footer{
+	background-color: #2c8b80;
+	color: #e8f6da;
+}
+footer a{
+	color: #e8f6da;
+	alink: #e8f6da;
+}
