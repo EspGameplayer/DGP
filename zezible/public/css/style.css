@@ -18,8 +18,9 @@
 /*-----------FIN RESPONSIVE-------------*/
 
 .card-header{
-	background-color: #79FCA3;
+	background-color: #2c8b80;
 	border-bottom: black solid 1px;
+	color: white;
 }
 .rightForm{
 	float: left !important;
