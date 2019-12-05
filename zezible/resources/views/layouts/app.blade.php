@@ -36,7 +36,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -58,27 +58,32 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('actividadesList')}}">Actividades disponibles</a>
                             </li>
+                            <li>
+                                <a class="nav-link" href="{{ route('Perfil') }}">Mi perfil</a>
+                            </li>
 
+
+                            @if(Auth::user()->esGestor())
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('Perfil') }}">Mi perfil</a>
+                                    
                                     
                                     @if(Auth::user()->esGestor())
                                     <a class="dropdown-item" href="{{ route('usuariosList')}}">Gestión de usuarios</a>
                                     <a class="dropdown-item" href="{{ route('crearActividadGrupal')}}">Crear actividad</a>
                                     @endif
                                     
-                                    @if(Auth::user()->esSocio())
+                                   <!-- @if(Auth::user()->esSocio())
                                     <a class="dropdown-item" href="{{ route('crearActividadSimple')}}">Crear actividad</a>
                                     @endif
                                     
                                     @if(Auth::user()->esVoluntario())
                                     <a class="dropdown-item" href="{{ route('crearActividadSimple')}}">Crear actividad</a>
-                                    @endif
+                                    @endif -->
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -91,6 +96,24 @@
                                     </form>
                                 </div>
                             </li>
+                            @endif
+
+                            @if((Auth::user()->esSocio())||(Auth::user()->esVoluntario()))
+                            <li>
+                                <a class="nav-link" href="{{ route('crearActividadSimple')}}">Crear actividad</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                </form>
+                            <li>
+                            @endif
+                            
                         @endguest
                     </ul>
                 </div>
