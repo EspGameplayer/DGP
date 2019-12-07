@@ -3,7 +3,7 @@
 @section('content')
 <div class="pagename">
   <div class="sub-pagename">
-<h1>Mi perfil</h1>
+<h1>Perfil de usuario</h1>
 </div>
 </div>
 <br>
@@ -14,7 +14,7 @@
   <div class="col-md-10">
 
 
-<div class="card col-md-10">
+<div class="card col-md-11">
   <div class="card-header"><h3>{{$usuario->name}}&nbsp;{{$usuario->ApellidoP}}&nbsp;{{$usuario->ApellidoM}}</h3>
   </div>
   <div class="card-body">
@@ -70,8 +70,8 @@
               <div class="form-row">
 
                   <div class="form-group col-md-12"  align="left">
-                      <label for="role">Rol</label>
-                      <input type="text" class="form-control" id="role" placeholder="Introduzca role" name="role" value="{{$usuario->roles->nombre}}">
+                      <label for="role"><b>Rol</b></label>
+                      <input type="text" class="form-control inputRol" id="role" placeholder="Introduzca role" name="role" value="{{$usuario->roles->nombre}}">
                   </div>
 
               </div>
@@ -84,15 +84,15 @@
 
 
 </div>
+
+@if(auth::user()->id == $usuario->id)
 <div class="col-md-2" align="left">
-<br><br>
-<div class="btn-group-vertical">
-<a href="#" class="btn btn-outline-success btn-lg" >Mis actividades</a>
-
+  <br><br><br>
+  <div class="btn-group-vertical">
+    <a href="{{route('MisActividades')}}" class="btn btn-outline-success btn-lg" >Mis actividades</a>
+  </div>
 </div>
-
-</div>
-
+@endif
 
 </div>
 

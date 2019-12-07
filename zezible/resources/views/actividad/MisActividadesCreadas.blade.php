@@ -2,7 +2,7 @@
 @section('content')
 <div class="pagename">
   <div class="sub-pagename">
-<h1>Mis actividades apuntadas</h1>
+<h1>Mis actividades propuestas</h1>
 </div>
 </div>
 <br>
@@ -48,11 +48,8 @@
 <div class="rightForm col-md-3" align="left">
               <br>
               <div class="btn-group-vertical">
-                <a href="{{url('/ver-actividad/'.$actividad->actividad_id)}}" class="btn btn-lg btn-outline-primary">Observar actividad</a>
-
-                @if($actividad->estado == "Cerrada")
-                <a href="{{url('/apuntados/'.$actividad->actividad_id)}}" class="btn btn-lg btn-outline-warning">Valorar usuarios</a>
-                @endif
+                <a href="{{url('/ver-actividad/'.$actividad->id)}}" class="btn btn-lg btn-outline-primary">Observar actividad</a>
+                 <a href="{{url('/apuntados/'.$actividad->id)}}" class="btn btn-lg btn-outline-success">Apuntados</a>
               </div>
  </div>
 

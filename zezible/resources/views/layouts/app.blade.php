@@ -36,7 +36,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+<<<<<<< Updated upstream
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+=======
+<<<<<<< HEAD
+                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+=======
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+>>>>>>> master
+>>>>>>> Stashed changes
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -61,6 +69,18 @@
                             <li>
                                 <a class="nav-link" href="{{ route('Perfil') }}">Mi perfil</a>
                             </li>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                            <li>
+                                <a class="nav-link" href="{{route('MisActividades')}}">Mis actividades apuntadas</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{route('MisActividadesCreadas')}}">Mis actividades creadas</a>
+                            </li>
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
 
 
                             @if(Auth::user()->esGestor())

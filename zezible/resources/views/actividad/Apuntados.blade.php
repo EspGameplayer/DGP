@@ -27,11 +27,11 @@
         	
          	<div class="col-md-3" align="right">
 
-                <div class="btn-group-vertical">
-               
-                <a href="#" class="btn btn-outline-warning btn-lg">Valorar</a>
-                </div>
-
+                @if($actividad->estado == "Cerrada")
+                  <div class="btn-group-vertical">
+                    <a href="#" class="btn btn-outline-warning btn-lg">Valorar</a>
+                  </div>
+                @endif
          	</div>
          	
         </div>

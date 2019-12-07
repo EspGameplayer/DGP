@@ -223,6 +223,12 @@ Route::get('/mis-actividades', array(
 'uses'=>'ActividadController@misactividades'
 ));
 
+Route::get('/mis-actividades-creadas', array(
+'as' => 'MisActividadesCreadas',
+'middleware' => 'auth',
+'uses'=>'ActividadController@misactividadesCreadas'
+));
+
 
 //------------FIN ACTIVIDAD-----------------
 

@@ -41,10 +41,10 @@
   </div>
 
   <div class="form-group col-md-4">
-    <label>Rol</label><br>
-    <input type="email" class="form-control" value=" {{$usuario->roles->nombre}}">   
+    <label><b>Rol</b></label><br>
+    <input type="email" class="form-control inputRol" value=" {{$usuario->roles->nombre}}">   
   </div>
-</div>
+</div> 
 
 
   </fieldset>

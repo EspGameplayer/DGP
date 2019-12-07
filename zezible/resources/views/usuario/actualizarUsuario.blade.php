@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row pagename">
+<div class="sub-pagename col-md-9">
+<h1>Editar usuario</h1>
+</div>
+</div>
 <br>
 
 <div class="container" align="center">
 
 <div class="card col-md-10">
-  <div class="card-header"><h3>EDITAR: {{$usuario->name}}&nbsp;{{$usuario->ApellidoP}}&nbsp;{{$usuario->ApellidoM}} </h3> </div>
+  <div class="card-header"><h3>{{$usuario->name}}&nbsp;{{$usuario->ApellidoP}}&nbsp;{{$usuario->ApellidoM}}</h3> <h3><b>{{$usuario->roles->nombre}}</b></h3></div>
   <div class="card-body">
 
          <form action="{{route('updateUsuario', ['usuario_id' => $usuario->id])}}" method="post" enctype="multipart/form-data" class="col-lg-12">

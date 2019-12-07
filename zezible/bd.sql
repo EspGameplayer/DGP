@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS zezible;
 USE zezible;
 
-/*Crea un usuario; email: "m@m.cl" - password: "12345678"*/
+/*Crea un usuario gestor; email: "m@m.cl" - password: "12345678"*/
 
 /*--------------------USUARIOS---------------------*/
 
@@ -148,3 +148,27 @@ CONSTRAINT pk_actividad_usuario PRIMARY KEY(id),
 CONSTRAINT fk_actividad_usuario_persona FOREIGN KEY(usuario_id) REFERENCES users(id),
 CONSTRAINT fk_actividad_usuario_actividad FOREIGN KEY(actividad_id) REFERENCES actividad(id)
 )ENGINE=InnoDb;
+
+/*--------------------FIN ACTIVIDADES---------------------*/
+
+/*--------------------VALORACION---------------------*/
+
+
+CREATE TABLE valoracion(
+id int(255)  auto_increment not null,
+socio_id int(255),
+voluntario_id int(255),
+actividad_id int(255),
+estado varchar(255), /* 'socio-voluntario' 'voluntario-socio'  */
+valoracion int(5),
+descripcion text,
+created_at datetime,
+updated_at datetime,
+CONSTRAINT pk_valoracion PRIMARY KEY(id),
+CONSTRAINT fk_valoracion_socio FOREIGN KEY(socio_id) REFERENCES socio(id),
+CONSTRAINT fk_valoracion_voluntario FOREIGN KEY(voluntario_id) REFERENCES voluntario(id),
+CONSTRAINT fk_valoracion_actividad FOREIGN KEY(actividad_id) REFERENCES actividad(id)
+)ENGINE=InnoDb;
+
+
+/*--------------------FIN VALORACION---------------------*/

@@ -71,9 +71,9 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            'fecha' => 'required',
+            /*'fecha' => 'required',
             'hora' => 'required',
-            'lugar' => 'required',
+            'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
@@ -118,9 +118,9 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            'fecha' => 'required',
+            /*'fecha' => 'required',
             'hora' => 'required',
-            'lugar' => 'required',
+            'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
@@ -184,9 +184,9 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            'fecha' => 'required',
+            /*'fecha' => 'required',
             'hora' => 'required',
-            'lugar' => 'required',
+            'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
@@ -267,9 +267,9 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            'fecha' => 'required',
+            /*'fecha' => 'required',
             'hora' => 'required',
-            'lugar' => 'required',
+            'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
@@ -415,6 +415,7 @@ class ActividadController extends Controller
 
       return view('actividad.Apuntados', array(
           'apuntados' => $apuntados,
+          'actividad' => $actividad,
       ));
     }
 
@@ -461,15 +462,40 @@ class ActividadController extends Controller
 
       $usuario =  \Auth::user();
 
+      /*$actividades = Actividad::where('actividadUsuario.usuario_id', $usuario->id)
+                                 ->orderBy('id', 'desc')
+                                ->paginate(6);*/
      
 
       $actividades = DB::table('actividad')
             ->join('actividad_usuario', 'actividad_usuario.actividad_id', '=', 'actividad.id')
-            ->join('actividad', 'actividad_usuario.actividad_id', '=', 'actividad.id')
-            ->where('actividad_usuario.id', $usuario->id)
-            ->orderBy('id', 'desc');
+            //->join('categoria', 'categoria.id', '=', 'actividad.categoria_id')
+            ->where('actividad_usuario.usuario_id', $usuario->id)
+            ->orderBy('actividad_id', 'desc')
+            ->take(6)
+            ->get(); 
+
+
+      
+    
+
 
        return view('actividad.MisActividades', array(
+       'actividades'  => $actividades,
+        ));
+
+    }
+
+
+    public function misactividadesCreadas(){
+
+      $usuario =  \Auth::user();
+
+      $actividades = Actividad::where('usuario_id', $usuario->id)
+                                ->orderBy('id', 'desc')
+                                ->paginate(6);
+     
+       return view('actividad.MisActividadesCreadas', array(
        'actividades'  => $actividades,
         ));
 

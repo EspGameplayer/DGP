@@ -69,7 +69,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">Aqui se encuentras todas las atividades que has realizado y las que te has apuntado</p>
-                <a href="#" class="btn btn-primary">Mis actividades</a>
+                <a href="{{route('MisActividades')}}" class="btn btn-primary">Mis actividades</a>
             </div>
     </div>
 </div>
