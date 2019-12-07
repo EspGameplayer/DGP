@@ -101,3 +101,49 @@ footer a{
 	color: #e8f6da;
 	alink: #e8f6da;
 }
+
+/*ESTRELLAS*/
+
+#Valoration{
+	border: 1px black solid;
+	background-color: #FFFD94;
+	margin-right: 10px;
+}
+
+#estrellass {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#estrellass p {
+  text-align: center;
+}
+
+#estrellass label {
+  font-size: 40px;
+}
+
+#estrellass input[type="radio"] {
+  display: none;
+}
+
+#estrellass label {
+  color: grey;
+}
+
+#estrellass .clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+#estrellass label:hover,
+#estrellass label:hover ~ label {
+  color: orange;
+}
+
+#estrellass input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+/*FIN ESTRELLAS*/
