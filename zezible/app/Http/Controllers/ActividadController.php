@@ -410,6 +410,7 @@ class ActividadController extends Controller
 
       $actividad = Actividad::find($actividad_id); 
       $apuntados = ActividadUsuario::where('actividad_id', $actividad_id)
+                                      ->where('usuario_id', '!=', auth()->id())
                                       ->orderBy('id', 'desc')
                                       ->paginate(15);
 

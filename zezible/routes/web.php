@@ -249,3 +249,13 @@ Route::get('/eliminar-comentario/{comentario_id}', array(
 ));
 
 //------------FIN COMENTARIOS-----------------
+
+//------------VALORACION-----------------
+
+Route::post('/valoracion', array(
+'as' => 'Valoracion',
+'middleware' => 'auth',
+'uses' => 'ValoracionController@save'
+));
+
+//------------FIN VALORACION-----------------
