@@ -229,7 +229,11 @@ Route::get('/mis-actividades-creadas', array(
 'uses'=>'ActividadController@misactividadesCreadas'
 ));
 
-
+Route::get('/actividadesUsuario/{usuario_id}', array(
+'as' => 'actividadesUsuario',
+'middleware' => 'esGestor',
+'uses'=>'ActividadController@actividadesUsuario'
+));
 //------------FIN ACTIVIDAD-----------------
 
 

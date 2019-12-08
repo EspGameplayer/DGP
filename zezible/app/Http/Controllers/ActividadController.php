@@ -501,4 +501,18 @@ class ActividadController extends Controller
         ));
 
     }
+
+    public function actividadesUsuario($usuario_id)
+    {
+        $usuario = User::find($usuario_id); 
+
+        $actividades = Actividad::where('usuario_id', $usuario->id)
+                                ->orderBy('id', 'desc')
+                                ->paginate(4);
+
+        return view('actividad.ActividadesUsuarioCreadas', array(
+       'actividades'  => $actividades,
+       'usuario' => $usuario,
+        ));
+    }
 }

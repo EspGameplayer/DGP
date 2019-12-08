@@ -92,6 +92,13 @@
     <a href="{{route('MisActividades')}}" class="btn btn-outline-success btn-lg" >Mis actividades</a>
   </div>
 </div>
+@elseif((auth::user()->id != $usuario->id)&&(auth::user()->roles->nombre == "Gestor"))
+<div class="col-md-2" align="left">
+  <br><br><br>
+  <div class="btn-group-vertical">
+    <a href="{{ route('actividadesUsuario', ['usuario_id' => $usuario->id]) }}" class="btn btn-outline-success btn-lg">Actividades de usuario</a>
+  </div>
+</div>
 @endif
 
 </div>
