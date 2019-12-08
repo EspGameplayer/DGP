@@ -515,4 +515,23 @@ class ActividadController extends Controller
        'usuario' => $usuario,
         ));
     }
+
+    public function actividadesUsuarioApuntadas($usuario_id)
+    {
+        $usuario = User::find($usuario_id); 
+
+
+        $actividades = DB::table('actividad')
+            ->join('actividad_usuario', 'actividad_usuario.actividad_id', '=', 'actividad.id')
+            //->join('categoria', 'categoria.id', '=', 'actividad.categoria_id')
+            ->where('actividad_usuario.usuario_id', $usuario->id)
+            ->orderBy('actividad_id', 'desc')
+            ->take(4)
+            ->get(); 
+
+       return view('actividad.ActividadesUsuarioApuntadas', array(
+       'actividades'  => $actividades,
+       'usuario' => $usuario,
+        ));
+    }
 }

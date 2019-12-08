@@ -96,7 +96,8 @@
 <div class="col-md-2" align="left">
   <br><br><br>
   <div class="btn-group-vertical">
-    <a href="{{ route('actividadesUsuario', ['usuario_id' => $usuario->id]) }}" class="btn btn-outline-success btn-lg">Actividades de usuario</a>
+   <a href="{{ route('actividadesUsuario', ['usuario_id' => $usuario->id]) }}" class="btn btn-outline-success btn-lg">Actividades creadas<br> de este usuario</a>
+    <a href="{{ route('actividadesApuntadasUsuario', ['usuario_id' => $usuario->id]) }}" class="btn btn-outline-success btn-lg">Actividades apuntadas<br> de este usuario</a>
   </div>
 </div>
 @endif

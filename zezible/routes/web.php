@@ -234,6 +234,12 @@ Route::get('/actividadesUsuario/{usuario_id}', array(
 'middleware' => 'esGestor',
 'uses'=>'ActividadController@actividadesUsuario'
 ));
+
+Route::get('/actividades-apuntadas-usuario/{usuario_id}', array(
+'as' => 'actividadesApuntadasUsuario',
+'middleware' => 'esGestor',
+'uses'=>'ActividadController@actividadesUsuarioApuntadas'
+));
 //------------FIN ACTIVIDAD-----------------
 
 
