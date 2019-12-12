@@ -33,15 +33,15 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                    Proponer actividad
+                    Proponer Actividad
             </div>
             <div class="card-body">
-                <p class="card-text">Crea la actividad que quieras y espera que tus compañeros se apunten.</p>
+                <p class="card-text">Cree la actividad que quiera y espere que sus compañeros se apunten.</p>
                 @if(Auth::user()->esGestor())
                 <a href="{{ route('crearActividadGrupal')}}" class="btn btn-primary">Crear actividad</a>
                 @else
                 <a href="{{ route('crearActividadSimple')}}" class="btn btn-primary">Crear actividad</a>
-                @endif 
+                @endif
             </div>
         </div>
     </div>
@@ -49,10 +49,10 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                    Consultar actividades
+                    Consultar Actividades
             </div>
             <div class="card-body">
-                <p class="card-text">Revisa las actividades disponibles.</p>
+                <p class="card-text">Revise las actividades disponibles.</p>
                 <a href="{{ route('actividadesList')}} " class="btn btn-primary">Ver actividades</a>
             </div>
         </div>
@@ -65,10 +65,10 @@
 <div class="col-md-6">
     <div class="card">
             <div class="card-header">
-                    Mis actividades
+                    Mis Actividades
             </div>
             <div class="card-body">
-                <p class="card-text">Aqui se encuentras todas las atividades que has realizado y las que te has apuntado</p>
+                <p class="card-text">Aquí se encuentran todas las actividades que usted ha realizado y las que se ha apuntado.</p>
                 <a href="{{route('MisActividades')}}" class="btn btn-primary">Mis actividades</a>
             </div>
     </div>
@@ -76,11 +76,11 @@
 <div class="col-md-6">
     <div class="card">
             <div class="card-header">
-                    Vacio
+                    Vacío
             </div>
             <div class="card-body">
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua</p>
+                tempor incididunt ut labore et dolore magna aliqua.</p>
                 <a href="#" class="btn btn-primary">Vacio</a>
             </div>
     </div>
