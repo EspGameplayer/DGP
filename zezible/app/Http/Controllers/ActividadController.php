@@ -38,7 +38,7 @@ class ActividadController extends Controller
                                           ->count();
 
         //-----------consulta extraña--------------
-        
+
         $apuntado = ActividadUsuario::where('usuario_id', ($usuario->id))->
                                       where('actividad_id', ($actividad->id))
                                     ->first();
@@ -49,13 +49,13 @@ class ActividadController extends Controller
         'totalApuntados' => $totalApuntados,
         ));
 
-           //sucede pq queremos verificar si el usuario autenticado esta apuntado 
+           //sucede pq queremos verificar si el usuario autenticado esta apuntado
            //en la actividad, y como la pk es un id y no el conjunto de las 2 fk
            //solo necesito capturar el primer objeto de esa consulta.
            //en la vista vemos si existe esa variable para mostrar el boton desapuntar.
-        
+
          //-----------fin consulta extraña--------------
-		     
+
     }
 
     public function crearGrupal(){
@@ -71,14 +71,16 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            /*'fecha' => 'required',
-            'hora' => 'required',
+            'maximo_socios' => 'required|gt:0',
+            'minimo_voluntarios' => 'required|gt:0'
+            /*'fecha' => 'required|after_or_equal:now',
+            'hora' => 'required|after_or_equal:now',
             'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
         $actividad = new Actividad();
-        
+
         $actividad->nombre = $request->input('nombre');
         $actividad->fecha = $request->input('fecha');
         $actividad->hora = $request->input('hora');
@@ -91,15 +93,15 @@ class ActividadController extends Controller
 
         $actividad->save();
 
-        
+
         $grupal = new ActividadGrupal();
         $grupal->id = $actividad->id;
-        $grupal->maximo_socios = $request->input('maximo_socios');        
+        $grupal->maximo_socios = $request->input('maximo_socios');
         $grupal->minimo_voluntarios = $request->input('minimo_voluntarios');
-        $grupal->cupo_socios = $request->input('maximo_socios');        
+        $grupal->cupo_socios = $request->input('maximo_socios');
         $grupal->cupo_voluntarios = $request->input('minimo_voluntarios');
         $grupal->save();
-                        
+
         return redirect()->route('actividadesList');
 
     }
@@ -118,8 +120,10 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            /*'fecha' => 'required',
-            'hora' => 'required',
+            'maximo_socios' => 'required|gt:0',
+            'minimo_voluntarios' => 'required|gt:0'
+            /*'fecha' => 'required|after_or_equal:now',
+            'hora' => 'required|after_or_equal:now',
             'lugar' => 'required',*/
         ]);
 
@@ -137,7 +141,7 @@ class ActividadController extends Controller
         $actividad->estado = "Disponible";
 
         $actividad->save();
-        
+
         $simple = new ActividadSimple();
         $simple->id = $actividad->id;
         $simple->save();
@@ -154,7 +158,7 @@ class ActividadController extends Controller
 
     public function actualizar($actividad_id){
 
-      $actividad = Actividad::find($actividad_id); 
+      $actividad = Actividad::find($actividad_id);
       $categorias = Categoria::all();
       $usuario =  \Auth::user();
 
@@ -171,27 +175,29 @@ class ActividadController extends Controller
         return view('actividad.actualizarActividads', array(
           'actividad' => $actividad,
           'categorias' => $categorias,
-        ));        
+        ));
       }
 
       }else{
         abort(403, "No tienes autorización para modificar esta actividad");
       }
-      
+
     }
 
     public function updateGrupal($actividad_id,Request $request){
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            /*'fecha' => 'required',
-            'hora' => 'required',
+            'maximo_socios' => 'required|gt:0',
+            'minimo_voluntarios' => 'required|gt:0'
+            /*'fecha' => 'required|after_or_equal:now',
+            'hora' => 'required|after_or_equal:now',
             'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
-        $actividad = Actividad::findOrFail($actividad_id); 
-        
+        $actividad = Actividad::findOrFail($actividad_id);
+
         $actividad->nombre = $request->input('nombre');
         $actividad->fecha = $request->input('fecha');
         $actividad->hora = $request->input('hora');
@@ -200,9 +206,9 @@ class ActividadController extends Controller
         $actividad->categoria_id = $request->input('categorias');
 
         $actividad->update();
-        
-      
-        $grupal = ActividadGrupal::findOrFail($actividad_id); 
+
+
+        $grupal = ActividadGrupal::findOrFail($actividad_id);
 
         $sociosApuntados = DB::table('actividad_usuario')
             ->join('users', 'actividad_usuario.usuario_id', '=', 'users.id')
@@ -227,18 +233,18 @@ class ActividadController extends Controller
                                                 ->count();
 */
 
-        $restaSocios =  $request->input('maximo_socios') - $sociosApuntados;                                       
+        $restaSocios =  $request->input('maximo_socios') - $sociosApuntados;
         if($restaSocios<0){
           //error->existen mas personas apuntadas que el maximo
           abort(403, "Ya existen mas personas apuntadas que el maximo ingresado");
         }
         elseif($restaSocios==0){
-           $grupal->maximo_socios = $request->input('maximo_socios'); 
+           $grupal->maximo_socios = $request->input('maximo_socios');
            $grupal->cupo_socios = $restaSocios;
            $grupal->update();
         }
         else{
-          $grupal->maximo_socios = $request->input('maximo_socios'); 
+          $grupal->maximo_socios = $request->input('maximo_socios');
           $grupal->cupo_socios = $restaSocios;
           $grupal->update();
         }
@@ -246,13 +252,13 @@ class ActividadController extends Controller
         $restaVoluntarios = $request->input('minimo_voluntarios') - $voluntariosApuntados;
 
         //if($restaVoluntarios>0){
-          $grupal->minimo_voluntarios = $request->input('minimo_voluntarios'); 
+          $grupal->minimo_voluntarios = $request->input('minimo_voluntarios');
           $grupal->cupo_voluntarios = $restaVoluntarios;
           $grupal->update();
         //}
 
         if($grupal->cupo_socios == 0 && $grupal->cupo_voluntarios <= 0){
-          $act = Actividad::findOrFail($grupal->id); 
+          $act = Actividad::findOrFail($grupal->id);
           $act->estado = "Cerrada";
           $act->update();
         }
@@ -267,13 +273,15 @@ class ActividadController extends Controller
 
         $validate = $this->validate($request, [
             'nombre' => 'required|max:255',
-            /*'fecha' => 'required',
-            'hora' => 'required',
+            'maximo_socios' => 'required|gt:0',
+            'minimo_voluntarios' => 'required|gt:0'
+            /*'fecha' => 'required|after_or_equal:now',
+            'hora' => 'required|after_or_equal:now',
             'lugar' => 'required',*/
         ]);
 
         $usuario =  \Auth::user();
-        $actividad = Actividad::findOrFail($actividad_id); 
+        $actividad = Actividad::findOrFail($actividad_id);
 
         $actividad->nombre = $request->input('nombre');
         $actividad->fecha = $request->input('fecha');
@@ -286,8 +294,8 @@ class ActividadController extends Controller
         $actividad->estado = "Disponible"; */
 
         $actividad->update();
-        
-      /*$simple = ActividadSimple::findOrFail($actividad_id); 
+
+      /*$simple = ActividadSimple::findOrFail($actividad_id);
         $simple->id = $actividad->id;
         $simple->save(); */
 
@@ -302,11 +310,11 @@ class ActividadController extends Controller
 
     }
 
-    public function apuntar($actividad_id) 
+    public function apuntar($actividad_id)
     {
-        $actividad = Actividad::find($actividad_id); 
+        $actividad = Actividad::find($actividad_id);
         $usuario =  \Auth::user();
-        
+
         if($actividad->tipo == "Simple"){
 
           $actividad->estado = "Cerrada";
@@ -320,7 +328,7 @@ class ActividadController extends Controller
 
         if($actividad->tipo == "Grupal"){
 
-          $grupal = ActividadGrupal::find($actividad_id); 
+          $grupal = ActividadGrupal::find($actividad_id);
           if($usuario->roles->nombre == "Socio"){
             $grupal->decrement('cupo_socios');
             if($grupal->cupo_socios == 0){
@@ -348,11 +356,11 @@ class ActividadController extends Controller
         ));
     }
 
-    public function desapuntar($actividad_id) 
+    public function desapuntar($actividad_id)
     {
-        $actividad = Actividad::find($actividad_id); 
+        $actividad = Actividad::find($actividad_id);
         $usuario =  \Auth::user();
-        
+
         if($actividad->tipo == "Simple"){
            if($usuario->roles->nombre == $actividad->usuario->roles->nombre){
             //eliminar.
@@ -371,7 +379,7 @@ class ActividadController extends Controller
 
         if($actividad->tipo == "Grupal"){
 
-          $grupal = ActividadGrupal::find($actividad_id); 
+          $grupal = ActividadGrupal::find($actividad_id);
           if($usuario->roles->nombre == "Socio"){
             if($grupal->cupo_socios == 0){
               $grupal->increment('cupo_socios');
@@ -408,7 +416,7 @@ class ActividadController extends Controller
 
     public function apuntados($actividad_id){
 
-      $actividad = Actividad::find($actividad_id); 
+      $actividad = Actividad::find($actividad_id);
       $apuntados = ActividadUsuario::where('actividad_id', $actividad_id)
                                       ->where('usuario_id', '!=', auth()->id())
                                       ->orderBy('id', 'desc')
@@ -420,9 +428,9 @@ class ActividadController extends Controller
       ));
     }
 
-    public function eliminar($actividad_id) 
+    public function eliminar($actividad_id)
     {
-        $actividad = Actividad::find($actividad_id); 
+        $actividad = Actividad::find($actividad_id);
         $usuario =  \Auth::user();
 
       if($usuario->id == $actividad->usuario_id){
@@ -437,7 +445,7 @@ class ActividadController extends Controller
             $grupal->delete();
           }
         }
-        
+
         if($actividad->tipo == "Simple"){
           $simple = ActividadSimple::find($actividad->id);
           if($simple){
@@ -452,8 +460,8 @@ class ActividadController extends Controller
         $actividad->delete();
 
         return redirect()->route('actividadesList');
-  
-  
+
+
      }else{
         abort(403, "No tienes autorización para eliminar esta actividad");
       }
@@ -466,7 +474,7 @@ class ActividadController extends Controller
       /*$actividades = Actividad::where('actividadUsuario.usuario_id', $usuario->id)
                                  ->orderBy('id', 'desc')
                                 ->paginate(6);*/
-     
+
 
       $actividades = DB::table('actividad')
             ->join('actividad_usuario', 'actividad_usuario.actividad_id', '=', 'actividad.id')
@@ -474,11 +482,11 @@ class ActividadController extends Controller
             ->where('actividad_usuario.usuario_id', $usuario->id)
             ->orderBy('actividad_id', 'desc')
             ->take(6)
-            ->get(); 
+            ->get();
 
 
-      
-    
+
+
 
 
        return view('actividad.MisActividades', array(
@@ -495,7 +503,7 @@ class ActividadController extends Controller
       $actividades = Actividad::where('usuario_id', $usuario->id)
                                 ->orderBy('id', 'desc')
                                 ->paginate(6);
-     
+
        return view('actividad.MisActividadesCreadas', array(
        'actividades'  => $actividades,
         ));
@@ -504,7 +512,7 @@ class ActividadController extends Controller
 
     public function actividadesUsuario($usuario_id)
     {
-        $usuario = User::find($usuario_id); 
+        $usuario = User::find($usuario_id);
 
         $actividades = Actividad::where('usuario_id', $usuario->id)
                                 ->orderBy('id', 'desc')
@@ -518,7 +526,7 @@ class ActividadController extends Controller
 
     public function actividadesUsuarioApuntadas($usuario_id)
     {
-        $usuario = User::find($usuario_id); 
+        $usuario = User::find($usuario_id);
 
 
         $actividades = DB::table('actividad')
@@ -527,7 +535,7 @@ class ActividadController extends Controller
             ->where('actividad_usuario.usuario_id', $usuario->id)
             ->orderBy('actividad_id', 'desc')
             ->take(4)
-            ->get(); 
+            ->get();
 
        return view('actividad.ActividadesUsuarioApuntadas', array(
        'actividades'  => $actividades,

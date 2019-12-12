@@ -5,6 +5,7 @@
 <div class="container" align="center">
 
     <div class="card col-md-10">
+        
         <div class="card-header">
             <h3>CREAR ACTIVIDAD</h3>
         </div>
