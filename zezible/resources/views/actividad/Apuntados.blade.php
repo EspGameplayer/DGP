@@ -1,4 +1,4 @@
- @extends('layouts.app')
+@extends('layouts.app')
 @section('content')
 <div class="pagename">
   <div class="sub-pagename">
@@ -11,23 +11,23 @@
 <ul class="list-unstyled" >
 @foreach($apuntados as $apuntado)
 
-        <div class="card col-md-9">
+      <div class="card col-md-9">
         <div class="card-header">
           <u> <a class="nameUser" href="{{url('/perfil-usuario/'.$apuntado->usuario_id)}}">{{$apuntado->usuario->name}}&nbsp;{{$apuntado->usuario->ApellidoP}}&nbsp;{{$apuntado->usuario->ApellidoM}}</a></u></div>
         <div class="card-body row" align="left">
-          
-            <div class="col-md-3" align="left">
+        	
+        		<div class="col-md-3" align="left">
               <br><br><br>
-              <label><b>Rol</b></label><br>
-              <label><b>Correo electronico</b></label> 
+        			<label><b>Rol</b></label><br>
+        			<label><b>Correo electronico</b></label> 
             </div>
-            <div class="col-md-3" align="left">
+        		<div class="col-md-3" align="left">
               <br><br><br>
-              <label>: {{$apuntado->usuario->roles->nombre}}</label><br>
-              <label>: {{$apuntado->usuario->email}}</label>
-            </div>
-          
-          <div id="Valoration" class="col-md-5" align="left">
+        			<label>: {{$apuntado->usuario->roles->nombre}}</label><br>
+             	<label>: {{$apuntado->usuario->email}}</label>
+        		</div>
+        	
+         	<div id="Valoration" class="col-md-5" align="left">
 
                 @if($actividad->estado == "Cerrada")
                   
@@ -71,8 +71,8 @@
 
 
                 @endif
-          </div>
-          
+         	</div>
+         	
         </div>
       </div>
 

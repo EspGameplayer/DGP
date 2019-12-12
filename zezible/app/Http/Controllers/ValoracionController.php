@@ -39,4 +39,5 @@ class ValoracionController extends Controller
     	'message' => 'Valoración realizada correctamente'
     	));
     }
+
 }

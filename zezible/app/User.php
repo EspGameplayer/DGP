@@ -69,6 +69,7 @@ class User extends Authenticatable
         }
         return false;
     }
+
     public function esNoGestor(){
         if($this->roles->nombre!='Gestor'){
             return true;
