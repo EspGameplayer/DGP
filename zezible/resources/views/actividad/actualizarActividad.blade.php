@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-<br>
 <div class="container" align="center">
 
     <div class="card col-md-10">

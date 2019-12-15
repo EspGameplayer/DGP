@@ -1,11 +1,9 @@
 @extends('layouts.app')
-
 @section('content')
-<br>
 <div class="container" align="center">
 
     <div class="card col-md-10">
-        
+
         <div class="card-header">
             <h3>CREAR ACTIVIDAD</h3>
         </div>
@@ -71,6 +69,7 @@
 
                 </div>
 
+
                 <div class="form-row">
 
                     <div class="form-group col-md-12"  align="left">
@@ -79,6 +78,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="form-row">
                     <div class="form-group col-md-12"  align="left">
@@ -94,6 +94,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="form-row">
 
