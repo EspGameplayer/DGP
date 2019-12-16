@@ -22,9 +22,9 @@ class ActividadController extends Controller {
                 ->paginate(6);
 
 
-       return view('actividad.Index', array(
-           'actividades'  => $actividades,
-       ));
+        return view('actividad.Index', array(
+            'actividades'  => $actividades,
+        ));
     }
 
     public function verActividad($actividad_id) {
@@ -47,23 +47,23 @@ class ActividadController extends Controller {
             'totalApuntados' => $totalApuntados,
         ));
 
-           //sucede pq queremos verificar si el usuario autenticado esta apuntado
-           //en la actividad, y como la pk es un id y no el conjunto de las 2 fk
-           //solo necesito capturar el primer objeto de esa consulta.
-           //en la vista vemos si existe esa variable para mostrar el boton desapuntar.
+        //sucede pq queremos verificar si el usuario autenticado esta apuntado
+        //en la actividad, y como la pk es un id y no el conjunto de las 2 fk
+        //solo necesito capturar el primer objeto de esa consulta.
+        //en la vista vemos si existe esa variable para mostrar el boton desapuntar.
 
-         //-----------fin consulta extraña--------------
+        //-----------fin consulta extraña--------------
 
     }
 
     public function crearGrupal() {
 
-      $categorias = Categoria::all();
+        $categorias = Categoria::all();
 
 
-      return view('actividad.crearActividad', array(
-          'categorias' => $categorias,
-      ));
+        return view('actividad.crearActividad', array(
+            'categorias' => $categorias,
+        ));
     }
 
     public function saveGrupal(Request $request) {
@@ -238,15 +238,16 @@ class ActividadController extends Controller {
 
         /*
         $sociosApuntados = ActividadUsuario::where('actividad_id', $grupal->id)
-            ->where('usuario_id', $socios->id)
-            ->count();
+                ->where('usuario_id', $socios->id)
+                ->count();
 
         $voluntariosApuntados = ActividadUsuario::where('actividad_id', $grupal->id)
-            ->where('usuario_id', $voluntarios->id)
-            ->count();
+                ->where('usuario_id', $voluntarios->id)
+                ->count();
         */
 
         $restaSocios =  $request->input('maximo_socios') - $sociosApuntados;
+        
         if($restaSocios<0) {
             //error->existen mas personas apuntadas que el maximo
             abort(403, "Ya existen mas personas apuntadas que el maximo ingresado");
@@ -300,20 +301,26 @@ class ActividadController extends Controller {
         $actividad->descripcion = $request->input('descripcion');
         $actividad->lugar = $request->input('lugar');
         $actividad->categoria_id = $request->input('categorias');
-      /*$actividad->usuario_id = $usuario->id;
+        /*
+        $actividad->usuario_id = $usuario->id;
         $actividad->tipo = "Simple";
-        $actividad->estado = "Disponible"; */
+        $actividad->estado = "Disponible";
+        */
 
         $actividad->update();
 
-      /*$simple = ActividadSimple::findOrFail($actividad_id);
+        /*
+        $simple = ActividadSimple::findOrFail($actividad_id);
         $simple->id = $actividad->id;
-        $simple->save(); */
+        $simple->save();
+        */
 
-      /*$apuntar = new ActividadUsuario();
+        /*
+        $apuntar = new ActividadUsuario();
         $apuntar->actividad_id = $actividad->id;
         $apuntar->usuario_id = $usuario->id;
-        $apuntar->save(); */
+        $apuntar->save();
+        */
 
 
         return redirect()->route('verActividad', ['actividad_id' => $actividad->id])->with(array(
@@ -518,8 +525,8 @@ class ActividadController extends Controller {
         $usuario = User::find($usuario_id);
 
         $actividades = Actividad::where('usuario_id', $usuario->id)
-                                ->orderBy('id', 'desc')
-                                ->paginate(4);
+                ->orderBy('id', 'desc')
+                ->paginate(4);
 
 
         return view('actividad.ActividadesUsuarioCreadas', array(

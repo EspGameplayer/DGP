@@ -94,9 +94,7 @@
                 </div>
 
                 <div class="form-row">
-
                     <button type="submit" class="btn btn-success btn-lg ">Modificar</button>
-
                 </div>
 
 

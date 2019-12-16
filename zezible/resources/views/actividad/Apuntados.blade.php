@@ -3,7 +3,7 @@
 <div class="pagename">
 
     <div class="sub-pagename">
-        <h1>Personas apuntadas a la actividad</h1>
+        <h1>Personas Apuntadas a la Actividad</h1>
     </div>
 
 </div>
@@ -25,20 +25,18 @@
             <div class="card-body row" align="left">
 
                 <div class="col-md-3" align="left">
-                    <br><br><br>
         			<label><b>Rol</b></label><br>
         			<label><b>Correo electronico</b></label>
                 </div>
 
                 <div class="col-md-3" align="left">
-                    <br><br><br>
         			<label>: {{$apuntado->usuario->roles->nombre}}</label><br>
                     <label>: {{$apuntado->usuario->email}}</label>
         		</div>
 
+                @if($actividad->estado == "Cerrada")
                 <div id="Valoration" class="col-md-5" align="left">
 
-                    @if($actividad->estado == "Cerrada")
                     <form class="col-md-12" method="POST"  action="{{ url('/valoracion') }}">
                         <div class="row">
                             {!! csrf_field() !!}
@@ -64,7 +62,6 @@
                             </div>
                             <!--FIN ESTRELLAS-->
 
-
                             <p>
                                 <textarea cols="80" rows="2" class="form-control" name="descripcion" placeholder="Haz un comentario acerca de tu compañero"required>{{old('descripcion')}}</textarea>
                             </p>
@@ -76,9 +73,9 @@
                             </div>
                         </div>
                     </form>
-                    @endif
 
                 </div>
+                @endif
 
             </div>
 
