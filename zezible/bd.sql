@@ -24,7 +24,7 @@ ApellidoP varchar(255),
 ApellidoM varchar(255),
 /*DNI varchar(255),*/
 nacimiento date,
-telefono int(25),
+telefono bigint(255),
 /*domicilio varchar(255),
 localidad varchar(255),
 provincia varchar(255),*/

@@ -45,6 +45,7 @@ class UsuarioController extends Controller {
              'ApellidoM' => 'required|max:255',
              'email' => 'required|email|max:255|unique:users',
              'password' => 'required|min:6|confirmed',
+             'telefono' => 'max:15',
          ]);
 
         $user = new User();
