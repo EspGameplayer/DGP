@@ -337,6 +337,8 @@ class ActividadController extends Controller {
 
         $usuario =  \Auth::user();
 
+        if($usuario->roles->nombre != "Gestor"){
+
         if($actividad->tipo == "Simple") {
             $actividad->estado = "Cerrada";
             $actividad->update();
@@ -376,6 +378,10 @@ class ActividadController extends Controller {
         return redirect()->route('verActividad', ['actividad_id' => $actividad->id])->with(array(
             'message' => 'Apuntado correctamente a la actividad'
         ));
+
+        }else{
+        abort(403, "No tienes autorización para apuntarte a esta actividad");
+      }
     }
 
     public function desapuntar($actividad_id) {
