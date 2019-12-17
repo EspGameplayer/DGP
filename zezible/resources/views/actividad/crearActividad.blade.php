@@ -44,7 +44,7 @@
 
                     <div class="form-group col-md-6"  align="left">
                         <label for="hora">Hora</label>
-                        <input type="time" class="form-control" id="hora" placeholder="Introduzca la hora" name="hora">
+                        <input type="time" min="00:00" max="12:59" class="form-control" id="hora" placeholder="Introduzca la hora" name="hora">
                     </div>
 
                     <div class="form-group col-md-6"  align="left">
