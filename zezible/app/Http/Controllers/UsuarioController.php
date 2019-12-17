@@ -12,6 +12,10 @@ use App\Socio;
 use App\Voluntario;
 use App\Role;
 
+use App\ActividadUsuario;
+use App\Valoracion;
+use App\Comentario;
+
 use Validator;
 use Hash;
 
@@ -248,39 +252,46 @@ class UsuarioController extends Controller {
     }
 
     public function eliminar($usuario_id) {
-        $usuario = User::find($usuario_id);
+        $usuario = User::find($usuario_id); 
+        if($usuario->roles->nombre == "Gestor"){
 
-        if($usuario->roles->nombre == "Gestor") {
             $gestor = Gestor::find($usuario->id);
-
             if($gestor){
-                $gestor->delete();
+
+                $apuntados = ActividadUsuario::where('usuario_id', $gestor->id)->delete();                   
+                $comentarios = Comentario::where('usuario_id', $gestor->id)->delete();
+
+            $gestor->delete();
             }
-
             $usuario->delete();
+
         }
-
-        if($usuario->roles->nombre == "Socio") {
+        if($usuario->roles->nombre == "Socio"){
+            
             $socio = Socio::find($usuario->id);
-
             if($socio){
+                $apuntados = ActividadUsuario::where('usuario_id', $socio->id)->delete();   
+                $valoraciones = Valoracion::where('socio_id', $socio->id)->delete();
+                $comentarios = Comentario::where('usuario_id', $socio->id)->delete();
                 $socio->delete();
             }
-
             $usuario->delete();
+        
         }
-
         if($usuario->roles->nombre == "Voluntario"){
+            
             $voluntario = Voluntario::find($usuario->id);
-
             if($voluntario){
+                $apuntados = ActividadUsuario::where('usuario_id', $voluntario->id)->delete();   
+                $valoraciones = Valoracion::where('voluntario_id', $voluntario->id)->delete();
+                $comentarios = Comentario::where('usuario_id', $voluntario->id)->delete();
                 $voluntario->delete();
             }
-
             $usuario->delete();
+
         }
-
-
+       
+        
         return redirect()->route('home');
     }
 
