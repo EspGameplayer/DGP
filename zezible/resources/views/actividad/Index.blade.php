@@ -69,7 +69,7 @@
 
                 <div class="btn-group-vertical">
                     <a href="{{url('/ver-actividad/'.$actividad->id)}}" class="btn btn-outline-primary">Observar</a>
-                    @if(Auth::user()->id == $actividad->usuario_id)
+                    @if((Auth::user()->id == $actividad->usuario_id)||(Auth::user()->roles->nombre == "Gestor"))  
                     <a href="{{url('/eliminar-actividad/'.$actividad->id)}}" class="btn btn-outline-danger ">Eliminar</a>
                     <a href="{{url('/actualizar-actividad/'.$actividad->id)}}" class="btn btn-outline-secondary" >Actualizar</a>
                     @endif
