@@ -166,7 +166,7 @@ class UsuarioController extends Controller {
         $user->nacimiento = $request->input('nacimiento');
         $user->telefono = $request->input('telefono');
 
-        $emails = DB::table('users')->pluck('email');
+        $emails = DB::table('users')->where('email', '!=', $user->email)->pluck('email');
 
         foreach($emails as $email){
             if($request->input('email') == $email) {
