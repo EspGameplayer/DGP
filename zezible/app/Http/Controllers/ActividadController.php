@@ -9,7 +9,9 @@ use App\Actividad;
 use App\ActividadGrupal;
 use App\ActividadSimple;
 use App\ActividadUsuario;
+use App\Valoracion;
 use App\Categoria;
+use App\Comentario;
 use App\User;
 
 //tipo de actividad ->  Simple o Grupal
@@ -447,40 +449,54 @@ class ActividadController extends Controller {
     }
 
     public function eliminar($actividad_id) {
-        $actividad = Actividad::find($actividad_id);
-        $usuario =  \Auth::user();
-
-        if($usuario->id == $actividad->usuario_id) {
-            if($actividad->tipo == "Grupal"){
-                $grupal = ActividadGrupal::find($actividad->id);
-                if($grupal) {
-                    $apuntados = ActividadUsuario::where('actividad_id', $actividad->id);
-                    foreach($apuntados as $apuntado) {
-                        $apuntado->delete();
-                    }
-                    $grupal->delete();
-                }
-            }
-
-            if($actividad->tipo == "Simple") {
-                $simple = ActividadSimple::find($actividad->id);
-                if($simple) {
-                    $apuntados = ActividadUsuario::where('actividad_id', $actividad->id);
-                    foreach($apuntados as $apuntado) {
-                        $apuntado->delete();
-                    }
-                    $simple->delete();
-                }
-            }
-
-            $actividad->delete();
+$actividad = Actividad::find($actividad_id); 
+        $user =  \Auth::user();
+        $usuario = User::find($user->id);
 
 
-            return redirect()->route('actividadesList');
+      if(($usuario->id == $actividad->usuario_id)||($usuario->roles->nombre == "Gestor")){
 
-        } else {
-            abort(403, "No tienes autorización para eliminar esta actividad");
+        if($actividad->tipo == "Grupal"){
+          
+          $grupal = ActividadGrupal::find($actividad->id);
+
+            $apuntados = ActividadUsuario::where('actividad_id', $actividad->id)->delete();
+              //foreach($apuntados as $apuntado){
+                //$apuntado->delete();
+            //}
+            $valoraciones = Valoracion::where('actividad_id', $actividad->id)->delete();
+              
+            $comentarios = Comentario::where('actividad_id', $actividad->id)->delete();
+              
+            $grupal->delete();
+          
         }
+        
+        if($actividad->tipo == "Simple"){
+
+          $simple = ActividadSimple::find($actividad->id);
+          
+           $apuntados = ActividadUsuario::where('actividad_id', $simple->id)->delete();     
+              
+            
+            $valoraciones = Valoracion::where('actividad_id', $simple->id)->delete();
+            
+
+            $comentarios = Comentario::where('actividad_id', $simple->id)->delete();
+            
+            
+            $simple->delete();
+          
+        }
+
+        $actividad->delete();
+
+        return redirect()->route('actividadesList');
+  
+  
+     }else{
+        abort(403, "No tienes autorización para eliminar esta actividad");
+      }
     }
 
     public function misactividades() {
