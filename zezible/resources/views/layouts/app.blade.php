@@ -81,6 +81,7 @@
                                     @if(Auth::user()->esGestor())
                                     <a class="dropdown-item" href="{{ route('usuariosList')}}">Gestión de usuarios</a>
                                     <a class="dropdown-item" href="{{ route('crearActividadGrupal')}}">Crear actividad</a>
+                                    <a class="dropdown-item" href="{{ route('TodasActividades')}}">Todas las actividades</a>
                                     @endif
                                     
                                    <!-- @if(Auth::user()->esSocio())

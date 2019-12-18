@@ -139,10 +139,16 @@ Route::get('/perfil-usuario/{usuario_id}', array(
 
 //-------------ACTIVIDAD-----------------
 
-Route::get('/actividades', array(
+Route::get('/actividades', array( //estas son las actividades disponibles
 'as' => 'actividadesList',
 'middleware' => 'auth',
 'uses'=>'ActividadController@index'
+));
+
+Route::get('/todas-actividades', array(
+'as' => 'TodasActividades',
+'middleware' => 'esGestor',
+'uses'=>'ActividadController@todas'
 ));
 
 Route::get('/ver-actividad/{actividad_id}', array(

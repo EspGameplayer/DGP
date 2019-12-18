@@ -29,6 +29,16 @@ class ActividadController extends Controller {
         ));
     }
 
+    public function todas()
+    {
+       $actividades = Actividad::orderBy('id', 'desc')
+                                ->paginate(6);
+
+       return view('actividad.Todas', array(
+       'actividades'  => $actividades,
+        ));
+    }
+
     public function verActividad($actividad_id) {
         $actividad = Actividad::find($actividad_id);
         $usuario = \Auth::user();
