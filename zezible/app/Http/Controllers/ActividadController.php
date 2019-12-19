@@ -344,8 +344,17 @@ class ActividadController extends Controller {
     public function apuntar($actividad_id) {
         // Recuperar Actividad de BD
         $actividad = Actividad::find($actividad_id);
-
         $usuario =  \Auth::user();
+
+        
+        //funcion para verificar si el usuario ya se apunto
+        $seApunto = ActividadUsuario::where('usuario_id', ($usuario->id))->
+                                      where('actividad_id', ($actividad->id))
+                                    ->first();
+        if($seApunto){
+          abort(403, "Usted ya se apuntó a esta actividad");
+        }
+        //fin.
 
         if($usuario->roles->nombre != "Gestor"){
 
