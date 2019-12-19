@@ -148,6 +148,9 @@
                </a>
                @endif
 
+               @if(Auth::user()->roles->nombre == "Gestor")
+               <a href="{{url('/valoraciones/'.$actividad->id)}}" class="btn btn-outline-warning btn-lg" > Valoraciones</a>
+               @endif
            </div>
 
        </div>

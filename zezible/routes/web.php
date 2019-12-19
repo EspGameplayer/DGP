@@ -274,4 +274,9 @@ Route::post('/valoracion', array(
 'uses' => 'ValoracionController@save'
 ));
 
+Route::get('/valoraciones/{actividad_id}', array(
+'as' => 'Valoraciones',
+'middleware' => 'esGestor',
+'uses'=>'ValoracionController@index'
+));
 //------------FIN VALORACION-----------------

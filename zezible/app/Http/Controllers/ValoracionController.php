@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Valoracion;
+use App\Actividad;
 use App\User;
 
 class ValoracionController extends Controller {
@@ -58,4 +59,16 @@ class ValoracionController extends Controller {
     	));
     }
 
+	public function index($actividad_id)
+    {
+        $actividad = Actividad::find($actividad_id); 
+        $valoraciones = Valoracion::where('actividad_id', $actividad->id)
+                                      ->orderBy('id', 'asc')
+                                      ->paginate(8);
+
+        return view('Valoraciones', array(
+          'valoraciones' => $valoraciones,
+          'actividad' => $actividad,
+        ));
+    }
 }
