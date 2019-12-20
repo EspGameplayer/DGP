@@ -358,14 +358,20 @@ class ActividadController extends Controller {
 
         if($usuario->roles->nombre != "Gestor"){
 
-        if($actividad->tipo == "Simple") {
+            if(($actividad->tipo == "Simple")
+            &&
+            ($usuario->roles->nombre != $actividad->usuario->roles->nombre)){
+  
             $actividad->estado = "Cerrada";
             $actividad->update();
             $apuntar = new ActividadUsuario();
             $apuntar->actividad_id = $actividad->id;
             $apuntar->usuario_id = $usuario->id;
             $apuntar->save();
-        }
+  
+          }else{
+            abort(403, "Esta actividad es para un usuario con otro rol");
+          }
 
         if($actividad->tipo == "Grupal") {
             $grupal = ActividadGrupal::find($actividad_id);
