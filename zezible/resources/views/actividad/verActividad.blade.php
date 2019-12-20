@@ -123,17 +123,9 @@
                  <a href="{{url('/actualizar-actividad/'.$actividad->id)}}" class="btn btn-outline-info btn-lg" >Actualizar</a>
                  @endif
 
-                 @if((Auth::user()->id != $actividad->usuario_id)&&(Auth::user()->roles->nombre != $actividad->usuario->roles->nombre))
-                    @if($apuntado!=null)
-                        @if(Auth::user()->id != $apuntado->usuario_id)
-                        <a href="{{url('/apuntar/'.$actividad->id)}}" class="btn btn-outline-success btn-lg" >Apuntarse</a>
-                        @endif
-                    @endif
-                @endif
-
-                @if($apuntado==null)
-                <a href="{{url('/apuntar/'.$actividad->id)}}" class="btn btn-outline-success btn-lg" >Apuntarse</a>
-                @endif
+                 @if(($apuntado==null)&&(Auth::user()->roles->nombre != "Gestor"))
+                      <a href="{{url('/apuntar/'.$actividad->id)}}" class="btn btn-outline-success btn-lg" >Apuntarse</a>
+                  @endif
 
                 @if($apuntado!=null)
                     @if(Auth::user()->id == $apuntado->usuario_id)
