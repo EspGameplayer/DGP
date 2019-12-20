@@ -72,9 +72,10 @@ border: 1px solid black;
 }
 
 .nameUser{
-	color: black;
-	alink: black;
-	vlink: #e8f6da;
+	color: white;
+	link: white;
+	visited: #e8f6da;
+	hover: white;
 }
 
 footer{

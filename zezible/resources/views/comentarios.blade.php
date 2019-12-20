@@ -54,7 +54,7 @@
     <div class="card">
 
         <div class="card-header">
-            <b>{{$comentario->usuario->name}}&nbsp;{{$comentario->usuario->ApellidoP}}&nbsp;{{$comentario->usuario->ApellidoM}}</b>
+        <u> <a class="nameUser" href="{{url('/perfil-usuario/'.$comentario->usuario_id)}}">{{$comentario->usuario->name}}&nbsp;{{$comentario->usuario->ApellidoP}}&nbsp;{{$comentario->usuario->ApellidoM}}</a></u>
         </div>
 
         <div class="card-body">
