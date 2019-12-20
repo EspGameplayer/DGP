@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Comentario;
+use App\Actividad;
+use App\ActividadUsuario;
 
 class ComentarioController extends Controller {
     public function save(Request $request) {
@@ -12,8 +14,22 @@ class ComentarioController extends Controller {
             'comentario' => 'required'
         ]);
 
+        $usuario =  \Auth::user();
+        $actividad = Actividad::find($request->input('actividad_id'));
+
+
+        
+        if($actividad->estado == "Cerrada"){
+
+            $usuarioApuntado = ActividadUsuario::where('usuario_id', ($usuario->id))->
+                                      where('actividad_id', ($actividad->id))
+                                    ->first();
+            if(!$usuarioApuntado){
+                abort(403, "Ya no puedes realizar comentarios a esta actividad");
+            }
+        }
+
         $comentario = new Comentario();
-    	$usuario =  \Auth::user();
 
     	$comentario->actividad_id = $request->input('actividad_id'); // el actividad_ID sera el que trae por parametro en la pagina
     	$comentario->usuario_id = $usuario->id;
