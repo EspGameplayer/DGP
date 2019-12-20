@@ -131,3 +131,12 @@ footer a{
 }
 
 /*FIN ESTRELLAS*/
+
+.dot {
+	height: 65px;
+	width: 65px;
+	background-color: orange;
+	color: white;
+	border-radius: 50%;
+	display: inline-block;
+  }
