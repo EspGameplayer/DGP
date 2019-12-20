@@ -78,7 +78,7 @@
                     <br>
 
                     <div class="btn-group-vertical">
-                        <a href="{{url('/ver-actividad/'.$actividad->actividad_id)}}" class="btn btn-lg btn-outline-primary">Observar actividad</a>
+                        <a href="{{url('/ver-actividad/'.$actividad->actividad_id)}}" class="btn btn-lg btn-primary">Observar actividad</a>
                     </div>
 
                 </div>

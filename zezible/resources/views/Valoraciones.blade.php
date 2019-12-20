@@ -26,7 +26,7 @@
     <div class="card-header">Socio</div>
     <div class="card-body">
       <h5 class="card-title">{{$valoracion->socio->persona->name}} {{$valoracion->socio->persona->ApellidoP}}</h5><br>
-      <p class="card-text"><a  class="btn btn-outline-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->socio_id)}}">Ver perfil</a></p>
+      <p class="card-text"><a  class="btn btn-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->socio_id)}}">Ver perfil</a></p>
       
     </div>
   </div>
@@ -45,7 +45,7 @@
     <div class="card-header">Voluntario</div>
     <div class="card-body">
       <h5 class="card-title">{{$valoracion->voluntario->persona->name}} {{$valoracion->voluntario->persona->ApellidoP}}</h5><br>
-      <p class="card-text"><a  class="btn btn-outline-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->voluntario_id)}}">Ver perfil</a></p>
+      <p class="card-text"><a  class="btn btn-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->voluntario_id)}}">Ver perfil</a></p>
     </div>
   </div>
 </div>
@@ -70,7 +70,7 @@
     <div class="card-header">Voluntario</div>
     <div class="card-body">
       <h5 class="card-title">{{$valoracion->voluntario->persona->name}} {{$valoracion->voluntario->persona->ApellidoP}}</h5><br>
-      <p class="card-text"><a  class="btn btn-outline-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->voluntario_id)}}">Ver perfil</a></p>
+      <p class="card-text"><a  class="btn btn-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->voluntario_id)}}">Ver perfil</a></p>
     </div>
   </div>
   
@@ -89,7 +89,7 @@
     <div class="card-header">Socio</div>
     <div class="card-body">
       <h5 class="card-title">{{$valoracion->socio->persona->name}} {{$valoracion->socio->persona->ApellidoP}}</h5><br>
-      <p class="card-text"><a  class="btn btn-outline-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->socio_id)}}">Ver perfil</a></p>
+      <p class="card-text"><a  class="btn btn-primary btn-lg" href="{{url('/perfil-usuario/'.$valoracion->socio_id)}}">Ver perfil</a></p>
       
     </div>
   </div> 

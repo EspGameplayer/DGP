@@ -68,7 +68,7 @@
 
                 <div class="col-md-2">
                     @if(Auth::user()->id == $comentario->usuario_id)
-                    <a href="{{url('/eliminar-comentario/'.$comentario->id)}}" class="btn btn-outline-danger btn-lg">Eliminar</a>
+                    <a href="{{url('/eliminar-comentario/'.$comentario->id)}}" class="btn btn-danger btn-lg">Eliminar</a>
                     @endif
                 </div>
 

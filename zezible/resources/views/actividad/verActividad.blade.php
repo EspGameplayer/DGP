@@ -119,17 +119,17 @@
                 <div class="btn-group-vertical">
 
                  @if(Auth::user()->id == $actividad->usuario_id)
-                 <a href="{{url('/eliminar-actividad/'.$actividad->id)}}" class="btn btn-outline-danger btn-lg">Eliminar</a>
-                 <a href="{{url('/actualizar-actividad/'.$actividad->id)}}" class="btn btn-outline-info btn-lg" >Actualizar</a>
+                 <a href="{{url('/eliminar-actividad/'.$actividad->id)}}" class="btn btn-danger btn-lg">Eliminar</a>
+                 <a href="{{url('/actualizar-actividad/'.$actividad->id)}}" class="btn btn-success btn-lg" >Actualizar</a>
                  @endif
 
                  @if(($apuntado==null)&&(Auth::user()->roles->nombre != "Gestor"))
-                      <a href="{{url('/apuntar/'.$actividad->id)}}" class="btn btn-outline-success btn-lg" >Apuntarse</a>
+                      <a href="{{url('/apuntar/'.$actividad->id)}}" class="btn btn-info btn-lg" >Apuntarse</a>
                   @endif
 
                 @if($apuntado!=null)
                     @if(Auth::user()->id == $apuntado->usuario_id)
-                    <a href="{{url('/desapuntar/'.$actividad->id)}}" class="btn btn-outline-warning btn-lg" > Desapuntarse</a>
+                    <a href="{{url('/desapuntar/'.$actividad->id)}}" class="btn btn-warning btn-lg" > Desapuntarse</a>
                     @endif
                 @endif
 
@@ -141,7 +141,7 @@
                @endif
 
                @if(Auth::user()->roles->nombre == "Gestor")
-               <a href="{{url('/valoraciones/'.$actividad->id)}}" class="btn btn-outline-warning btn-lg" > Valoraciones</a>
+               <a href="{{url('/valoraciones/'.$actividad->id)}}" class="btn btn-warning btn-lg" > Valoraciones</a>
                @endif
            </div>
 

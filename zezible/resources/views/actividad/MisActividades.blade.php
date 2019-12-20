@@ -75,9 +75,9 @@
                     <br>
 
                     <div class="btn-group-vertical">
-                        <a href="{{url('/ver-actividad/'.$actividad->actividad_id)}}" class="btn btn-lg btn-outline-primary">Observar actividad</a>
+                        <a href="{{url('/ver-actividad/'.$actividad->actividad_id)}}" class="btn btn-lg btn-primary">Observar actividad</a>
                         @if(($actividad->estado == "Cerrada")&&(Auth::user()->esNoGestor()))
-                        <a href="{{url('/apuntados/'.$actividad->actividad_id)}}" class="btn btn-lg btn-outline-warning">Valorar usuarios</a>
+                        <a href="{{url('/apuntados/'.$actividad->actividad_id)}}" class="btn btn-lg btn-warning">Valorar usuarios</a>
                         @endif
                     </div>
 

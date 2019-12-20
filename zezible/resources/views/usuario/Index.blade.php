@@ -60,8 +60,8 @@
                     <div class="btn-group-vertical">
 
                         @if(Auth::check())
-                        <a href="{{url('/eliminar-usuario/'.$usuario->id)}}" class="btn btn-outline-danger btn-lg">Eliminar</a>
-                        <a href="{{url('/actualizar-usuario/'.$usuario->id)}}" class="btn btn-outline-success btn-lg" >Actualizar</a>
+                        <a href="{{url('/eliminar-usuario/'.$usuario->id)}}" class="btn btn-danger btn-lg">Eliminar</a>
+                        <a href="{{url('/actualizar-usuario/'.$usuario->id)}}" class="btn btn-success btn-lg" >Actualizar</a>
                         @endif
 
                     </div>
