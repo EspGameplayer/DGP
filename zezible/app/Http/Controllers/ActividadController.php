@@ -341,12 +341,12 @@ class ActividadController extends Controller {
 
     }
 
-    public function apuntar($actividad_id) {
-        // Recuperar Actividad de BD
-        $actividad = Actividad::find($actividad_id);
+    public function apuntar($actividad_id) 
+    {
+        $actividad = Actividad::find($actividad_id); 
         $usuario =  \Auth::user();
 
-        
+
         //funcion para verificar si el usuario ya se apunto
         $seApunto = ActividadUsuario::where('usuario_id', ($usuario->id))->
                                       where('actividad_id', ($actividad->id))
@@ -355,56 +355,60 @@ class ActividadController extends Controller {
           abort(403, "Usted ya se apuntó a esta actividad");
         }
         //fin.
-
+        
         if($usuario->roles->nombre != "Gestor"){
+          
+        
 
-            if(($actividad->tipo == "Simple")
-            &&
-            ($usuario->roles->nombre != $actividad->usuario->roles->nombre)){
-  
-            $actividad->estado = "Cerrada";
-            $actividad->update();
-            $apuntar = new ActividadUsuario();
-            $apuntar->actividad_id = $actividad->id;
-            $apuntar->usuario_id = $usuario->id;
-            $apuntar->save();
-  
-          }else{
-            abort(403, "Esta actividad es para un usuario con otro rol");
+
+        if(($actividad->tipo == "Simple")
+          &&
+          ($usuario->roles->nombre != $actividad->usuario->roles->nombre)){
+
+          $actividad->estado = "Cerrada";
+          $actividad->update();
+          $apuntar = new ActividadUsuario();
+          $apuntar->actividad_id = $actividad->id;
+          $apuntar->usuario_id = $usuario->id;
+          $apuntar->save();
+
+        }elseif($actividad->tipo == "Grupal"){
+
+        
+
+          $grupal = ActividadGrupal::find($actividad_id); 
+          if($usuario->roles->nombre == "Socio"){
+            $grupal->decrement('cupo_socios');
+            
           }
+          if($usuario->roles->nombre == "Voluntario"){
+            $grupal->decrement('cupo_voluntarios');
+            
+          }
+          if(($grupal->cupo_socios == 0)&&($grupal->cupo_voluntarios <= 0)){
+              $actividad->estado = "Cerrada";
+              $actividad->update();
+          }else{
+              $grupal->update();
+          }
+          $apuntar = new ActividadUsuario();
+          $apuntar->actividad_id = $actividad->id;
+          $apuntar->usuario_id = $usuario->id;
+          $apuntar->save();
 
-        if($actividad->tipo == "Grupal") {
-            $grupal = ActividadGrupal::find($actividad_id);
-
-                if($usuario->roles->nombre == "Socio") {
-                    $grupal->decrement('cupo_socios');
-                    if($grupal->cupo_socios == 0) {
-                        $actividad->estado = "Cerrada";
-                        $actividad->update();
-                    }
-                }
-
-                if($usuario->roles->nombre == "Voluntario"){
-                    $grupal->decrement('cupo_voluntarios');
-                    if($grupal->cupo_voluntarios == 0){
-                        $actividad->estado = "Cerrada";
-                        $actividad->update();
-                    }
-                }
-
-                $grupal->update();
-                $apuntar = new ActividadUsuario();
-                $apuntar->actividad_id = $actividad->id;
-                $apuntar->usuario_id = $usuario->id;
-                $apuntar->save();
-            }
-
-
-        return redirect()->route('verActividad', ['actividad_id' => $actividad->id])->with(array(
-            'message' => 'Apuntado correctamente a la actividad'
-        ));
+        
 
         }else{
+          abort(403, "Esta actividad es para un usuario con otro rol");
+        }
+
+        
+
+        return redirect()->route('verActividad', ['actividad_id' => $actividad->id])->with(array(
+        'message' => 'Apuntado correctamente a la actividad'
+        ));
+
+      }else{
         abort(403, "No tienes autorización para apuntarte a esta actividad");
       }
     }
