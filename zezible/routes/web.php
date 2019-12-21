@@ -280,3 +280,45 @@ Route::get('/valoraciones/{actividad_id}', array(
 'uses'=>'ValoracionController@index'
 ));
 //------------FIN VALORACION-----------------
+
+//--------------CATEGORIAS------------------
+
+
+Route::get('/categorias', array(
+	'as' => 'Categorias',
+	'middleware' => 'esGestor',
+	'uses'=>'CategoriaController@index'
+	));
+	
+	Route::get('/crear-categoria', array(
+	'as' => 'CrearCategoria',
+	'middleware' => 'esGestor',
+	'uses'=>'CategoriaController@crear'
+	));
+	
+	Route::post('/guardar-categoria', array(
+	'as' => 'guardarCategoria',
+	'middleware' => 'esGestor', 
+	'uses'=>'CategoriaController@save'
+	));
+	
+	Route::get('/editar-categoria/{categoria_id}', array(
+	'as' => 'editarCategoria',
+	'middleware' => 'esGestor',
+	'uses'=>'CategoriaController@editar'
+	));
+	
+	Route::post('/actualizar-categoria/{categoria_id}', array(
+	'as' => 'ActualizarCategoria',
+	'middleware' => 'esGestor', 
+	'uses'=>'CategoriaController@actualizar'
+	));
+	/*
+	Route::get('/eliminar-categoria/{categoria_id}', array(
+	'as' => 'EliminarCategoria',
+	'middleware' => 'esGestor',
+	'uses'=>'CategoriaController@eliminar'
+	));
+	*/
+	
+	//-----------FIN CATEGORIAS----------------

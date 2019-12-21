@@ -82,6 +82,7 @@
                                     <a class="dropdown-item" href="{{ route('usuariosList')}}">Gestión de usuarios</a>
                                     <a class="dropdown-item" href="{{ route('crearActividadGrupal')}}">Crear actividad</a>
                                     <a class="dropdown-item" href="{{ route('TodasActividades')}}">Todas las actividades</a>
+                                    <a class="dropdown-item" href="{{ route('Categorias')}}">Gestión de categorias</a>
                                     @endif
                                     
                                    <!-- @if(Auth::user()->esSocio())
